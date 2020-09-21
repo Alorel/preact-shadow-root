@@ -11,6 +11,7 @@
     "experimentalDecorators": true,
     "strictNullChecks": true,
     "jsxFactory": "h",
+    "jsx": "react",
     "newLine": "lf",
     "noImplicitAny": true,
     "noImplicitReturns": true,
