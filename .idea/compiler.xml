@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="TypeScriptCompiler">
+    <option name="enableServiceForProjectsWithoutConfig" value="false" />
     <option name="scopeName" value="Current File" />
-    <option name="typeScriptCompilerParams" value="--experimentalDecorators --target ESNext tsconfig.json --jsx react --jsxFactory h" />
+    <option name="typeScriptCompilerParams" value="-p tsconfig.test.json" />
     <option name="useConfig" value="true" />
+    <option name="useService" value="false" />
   </component>
 </project>

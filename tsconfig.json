@@ -1,12 +1,6 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "target": "esnext",
-    "sourceMap": false,
-    "module": "es2015"
-  },
-  "files": [
-    "declarations.d.ts",
-    "src/index.ts"
-  ]
+    "sourceMap": false
+  }
 }
