@@ -24,14 +24,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@alorel/eslint-config-preact@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@alorel/eslint-config-preact@npm:1.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40alorel%2Feslint-config-preact%2F1.0.1%2F0ba5d13d31dcb32903af49bbf2df26ac90aa6cd4c25f3ba5a6f8baa62a9a9c28"
+"@alorel/eslint-config-preact@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@alorel/eslint-config-preact@npm:1.0.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40alorel%2Feslint-config-preact%2F1.0.2%2Fef8ca07ed2ccd0c17588448bdff805f284deb091c169ef9fb91fc61cb53ff1a0"
   peerDependencies:
     eslint: ">=7.9.0"
     eslint-plugin-react: ">=7.20"
     eslint-plugin-react-hooks: ">=4.1.2"
-  checksum: 2/3b063b15f7bc83885c977aef76e87a816a40136449fba63956493595666826c15d61ff1a96883b7a7856f1b4b6ae590828afb9163667f1b5460d5f6d885cbf87
+  checksum: 2/e34e8a75a51102bc9b7c1f4ce8e8b03faaeb191a7d1fc6846344608bbe04c79b196a6cc302aa8326d28a1002b39199127317b9e6f9f31825a8dd407a24e7eb8f
   languageName: node
   linkType: hard
 
@@ -52,7 +52,7 @@ __metadata:
   dependencies:
     "@alorel-personal/conventional-changelog-alorel": ^2.1.3
     "@alorel/eslint-config-base": ^1.0.6
-    "@alorel/eslint-config-preact": ^1.0.1
+    "@alorel/eslint-config-preact": ^1.0.2
     "@alorel/eslint-config-typescript": ^1.0.7
     "@alorel/rollup-plugin-clean": ^1.0.0
     "@alorel/rollup-plugin-copy": ^1.0.1

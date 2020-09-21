@@ -6,12 +6,6 @@ import {useLayoutEffect, useRef, useState} from 'preact/hooks';
 interface ShadowHostProps<E extends keyof HTMLElementTagNameMap = 'div'>
   extends JSX.HTMLAttributes<HTMLElementTagNameMap[E]> {
 
-  /**
-   * Host element type. Changes to this property are ignored.
-   * @default div
-   */
-  host?: E;
-
   /** Shadow root content */
   children: ComponentChildren;
 
@@ -26,34 +20,24 @@ interface ShadowHostProps<E extends keyof HTMLElementTagNameMap = 'div'>
 function ShadowHost<E extends keyof HTMLElementTagNameMap = 'div'>(props: ShadowHostProps<E>): VNode<any> {
   const {
     children,
-    host,
-    mode,
-    ...otherProps
+    mode
   } = props;
-
-  // Ensure we don't destroy the old host element
-  const [initialHost] = useState<E>(host!);
 
   // A placeholder element will be displayed before a shadow root is created
   const [shadowRoot, setShadowRoot] = useState<ShadowRoot | null>(null);
-  const ref = useRef<HTMLElement>();
+  const ref = useRef<HTMLDivElement>();
   useLayoutEffect(() => {
-    setShadowRoot(ref.current!.attachShadow({mode: mode!}));
+    setShadowRoot(ref.current!.parentElement!.attachShadow({mode: mode!}));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!shadowRoot) {
-    return h(initialHost as string, {ref, style: 'display:none!important'} as any);
+    return <div ref={ref} style={'display:none!important'}/>;
   }
 
-  return h(
-    initialHost as string,
-    {...otherProps, ref} as any,
-    createPortal(<Fragment>{children}</Fragment>, shadowRoot as any)
-  );
+  return createPortal(<Fragment>{children}</Fragment>, shadowRoot as any);
 }
 
 ShadowHost.defaultProps = {
-  host: 'div',
   mode: 'open'
 } as Partial<ShadowHostProps>;
 
