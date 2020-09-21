@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "sourceMap": true
+  },
+  "files": [
+    "node_modules/enzyme-adapter-preact-pure/index.d.ts",
+    "declarations.d.ts",
+    "src/index.ts"
+  ]
+}

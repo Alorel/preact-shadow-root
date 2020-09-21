@@ -1,5 +1,3 @@
-import {_tmp} from './inner-import';
-
-console.log(_tmp());
-
-export const foo = 1;
+export * from './lib/ShadowHost';
+export * from './lib/adopted/AdoptedStylesheets';
+export {sheetToString} from './lib/adopted/sheetToString';

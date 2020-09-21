@@ -11,10 +11,13 @@
     "experimentalDecorators": true,
     "strictNullChecks": true,
     "jsxFactory": "h",
+    "jsx": "react",
     "newLine": "lf",
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
+    "target": "esnext",
+    "module": "es2015",
     "strictBindCallApply": true,
     "resolveJsonModule": true,
     "assumeChangesOnlyAffectDirectDependencies": true,
@@ -23,5 +26,9 @@
   },
   "exclude": [
     "node_modules"
+  ],
+  "files": [
+    "declarations.d.ts",
+    "src/index.ts"
   ]
 }

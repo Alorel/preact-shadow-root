@@ -1,4 +1,9 @@
 root: true
+ignorePatterns:
+  - /dist
+  - /coverage
+  - '**/*.d.ts'
 extends:
   - '@alorel/eslint-config-base'
   - '@alorel/eslint-config-typescript'
+  - '@alorel/eslint-config-preact'

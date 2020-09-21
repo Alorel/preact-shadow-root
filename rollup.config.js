@@ -1,94 +1,91 @@
 import {join} from 'path';
 import {cleanPlugin} from '@alorel/rollup-plugin-clean';
-import {copyPkgJsonPlugin} from "@alorel/rollup-plugin-copy-pkg-json";
-import {copyPlugin} from "@alorel/rollup-plugin-copy";
+import {copyPkgJsonPlugin} from '@alorel/rollup-plugin-copy-pkg-json';
+import {copyPlugin} from '@alorel/rollup-plugin-copy';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import {promises as fs} from 'fs';
-import {threadedTerserPlugin} from "@alorel/rollup-plugin-threaded-terser";
+import {threadedTerserPlugin} from '@alorel/rollup-plugin-threaded-terser';
 import {dtsPlugin} from '@alorel/rollup-plugin-dts';
-import * as pkgJson from './package.json';
 import typescript from 'rollup-plugin-typescript2';
 
-const umdName = 'MyLibrary';
-const umdGlobals = {};
+const umdName = 'PreactShadowRoot';
+const umdGlobals = {
+  preact: 'preact',
+  'preact/compat': 'preactCompat',
+  'preact/hooks': 'preactHooks'
+};
 
-const distDir = join(__dirname, 'dist');
+const distDir = join(__dirname, 'dist', 'main');
 const srcDir = join(__dirname, 'src');
-const bundleDir = join(distDir, 'bundle');
-
+const external = ['preact', 'preact/compat', 'preact/hooks'];
 const clean$ = cleanPlugin({dir: distDir});
 const banner$ = fs.readFile(join(__dirname, 'LICENSE'), 'utf8')
   .then(f => `/*\n${f.trim()}\n*/\n`);
 
 function mkNodeResolve() {
   return nodeResolve({
-    mainFields: ['fesm5', 'esm5', 'module', 'browser', 'main'],
-    extensions: ['.js', '.ts']
+    extensions: ['.js', '.ts'],
+    mainFields: [
+      'fesm5',
+      'esm5',
+      'module',
+      'browser',
+      'main'
+    ]
   });
 }
 
 const baseInput = join(srcDir, 'index.ts');
 
 const baseSettings = {
+  external: external.concat('tslib'),
   input: join(srcDir, 'index.ts'),
-  // external: Array.from(
-  //   new Set(
-  //     Object.keys(Object.keys(pkgJson.dependencies || {}))
-  //       .concat(Object.keys(pkgJson.peerDependencies || {}))
-  //       .filter(p => !p.startsWith('@types/'))
-  //   )
-  // ),
-  preserveModules: true,
+  preserveModules: false,
   watch: {
     exclude: 'node_modules/*'
   }
 };
 
 const baseOutput = {
-  entryFileNames: '[name].js',
   assetFileNames: '[name][extname]',
+  dir: distDir,
+  entryFileNames: '[name].js',
   sourcemap: false
 };
 
-function isTruthy(v) {
-  return !!v;
-}
-
-export default function ({watch}) {
+export default function({watch}) { // eslint-disable-line max-lines-per-function
   const cjs = {
     ...baseSettings,
     input: baseInput,
     output: {
       ...baseOutput,
-      dir: distDir,
       format: 'cjs',
-      plugins: watch ? [] : [
-        copyPkgJsonPlugin({
-          unsetPaths: ['devDependencies', 'scripts']
-        }),
-        dtsPlugin({
-          cliArgs: ['--rootDir', 'src']
-        }),
-      ]
+      plugins: watch ?
+        [] :
+        [
+          copyPkgJsonPlugin({
+            unsetPaths: ['devDependencies', 'scripts']
+          }),
+          dtsPlugin({
+            cliArgs: ['--rootDir', 'src']
+          })
+        ],
+      preferConst: true
     },
     plugins: [
       clean$,
       !watch && copyPlugin({
+        copy: ['LICENSE', 'CHANGELOG.md', 'README.md'],
         defaultOpts: {
+          emitNameKind: 'fileName',
           glob: {
             cwd: __dirname
-          },
-          emitNameKind: 'fileName'
-        },
-        copy: [
-          'LICENSE',
-          'CHANGELOG.md',
-          'README.md'
-        ]
+          }
+        }
       }),
       mkNodeResolve(),
       typescript()
-    ].filter(isTruthy)
+    ].filter(Boolean)
   };
 
   if (watch) {
@@ -99,46 +96,12 @@ export default function ({watch}) {
     cjs,
     {
       ...baseSettings,
-      input: baseInput,
-      output: {
-        ...baseOutput,
-        format: 'es',
-        dir: join(distDir, 'esm2015')
-      },
-      plugins: [
-        mkNodeResolve(),
-        typescript()
-      ]
-    },
-    {
-      ...baseSettings,
-      input: baseInput,
-      output: {
-        ...baseOutput,
-        format: 'es',
-        dir: join(distDir, 'esm5')
-      },
-      plugins: [
-        mkNodeResolve(),
-        typescript({
-          tsconfigOverride: {
-            compilerOptions: {
-              target: 'es5'
-            }
-          }
-        })
-      ]
-    },
-    {
-      ...baseSettings,
-      preserveModules: false,
       output: [
         {
           ...baseOutput,
           banner: () => banner$,
-          dir: bundleDir,
-          entryFileNames: 'fesm5.js',
-          format: 'es',
+          entryFileNames: 'index.esm5.js',
+          format: 'es'
         }
       ],
       plugins: [
@@ -154,50 +117,44 @@ export default function ({watch}) {
     },
     {
       ...baseSettings,
-      preserveModules: false,
       output: [
         {
           ...baseOutput,
           banner: () => banner$,
-          dir: bundleDir,
-          entryFileNames: 'fesm2015.js',
-          format: 'es',
+          entryFileNames: 'index.esm2015.js',
+          format: 'es'
         }
       ],
-      plugins: [
-        mkNodeResolve(),
-        typescript()
-      ]
+      plugins: [mkNodeResolve(), typescript()]
     },
     {
       ...baseSettings,
-      preserveModules: false,
+      external,
       output: (() => {
         const base = {
           ...baseOutput,
           banner: () => banner$,
-          name: umdName,
+          format: 'umd',
           globals: umdGlobals,
-          dir: bundleDir,
-          format: 'umd'
+          name: umdName
         };
 
         return [
           {
             ...base,
-            entryFileNames: 'umd.js'
+            entryFileNames: 'index.umd.js'
           },
           {
             ...base,
-            entryFileNames: 'umd.min.js',
+            entryFileNames: 'index.umd.min.js',
             plugins: [
               threadedTerserPlugin({
                 terserOpts: {
                   compress: {
                     drop_console: true,
+                    ecma: 5,
                     keep_infinity: true,
-                    typeofs: false,
-                    ecma: 5
+                    typeofs: false
                   },
                   ecma: 5,
                   ie8: true,
@@ -215,7 +172,7 @@ export default function ({watch}) {
               })
             ]
           }
-        ]
+        ];
       })(),
       plugins: [
         mkNodeResolve(),
@@ -228,5 +185,5 @@ export default function ({watch}) {
         })
       ]
     }
-  ].filter(isTruthy);
-};
+  ].filter(Boolean);
+}
