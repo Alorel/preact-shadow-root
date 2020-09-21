@@ -69,7 +69,8 @@ export default function({watch}) { // eslint-disable-line max-lines-per-function
           dtsPlugin({
             cliArgs: ['--rootDir', 'src']
           })
-        ]
+        ],
+      preferConst: true
     },
     plugins: [
       clean$,

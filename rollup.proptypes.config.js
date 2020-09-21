@@ -172,6 +172,21 @@ export default [
             source: `${JSON.stringify(writePkg, null, 2)}\n`, // eslint-disable-line no-magic-numbers
             type: 'asset'
           });
+
+          this.emitFile({
+            fileName: 'README.md',
+            source: `# preact-shadow-root prop types
+
+This should be used alongside the [main package](https://github.com/Alorel/preact-shadow-root)
+`,
+            type: 'asset'
+          });
+
+          this.emitFile({
+            fileName: 'index.d.ts',
+            source: 'export {};\n',
+            type: 'asset'
+          });
         }
       }
     ]
