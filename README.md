@@ -2,7 +2,8 @@
 
 Adapted from and inspired by [react-shadow-root](https://github.com/apearce/react-shadow-root).
 
-Allows you to render a Preact component inside a ShadowRoot. Supports constructable stylesheets and slotted elements.
+A tiny 1.3 kB minified library for rendering a Preact component inside a ShadowRoot.
+Supports constructable stylesheets and slotted elements.
 
 -----
 
