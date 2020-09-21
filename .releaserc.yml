@@ -17,10 +17,14 @@ prepare:
       - yarn.lock
   - path: &exec '@semantic-release/exec'
     cmd: yarn run rollup
+  - path: *exec
+    cmd: yarn run rollup:prop-types
 
 publish:
   - path: *exec
-    cmd: bash -c "cd dist && npm publish"
+    cmd: bash -c "cd dist/main && npm publish"
+  - path: *exec
+    cmd: bash -c "cd dist/prop-types && npm publish"
   - *gh
 
 generateNotes:

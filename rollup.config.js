@@ -15,7 +15,7 @@ const umdGlobals = {
   'preact/hooks': 'preactHooks'
 };
 
-const distDir = join(__dirname, 'dist');
+const distDir = join(__dirname, 'dist', 'main');
 const srcDir = join(__dirname, 'src');
 const external = ['preact', 'preact/compat', 'preact/hooks'];
 const clean$ = cleanPlugin({dir: distDir});

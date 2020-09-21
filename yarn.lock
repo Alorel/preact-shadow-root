@@ -15,12 +15,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@alorel/eslint-config-base@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "@alorel/eslint-config-base@npm:1.0.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40alorel%2Feslint-config-base%2F1.0.6%2Fa2fb877874064828a06238fab1587799947c66c09c295430699c1f85cc32296f"
+"@alorel/eslint-config-base@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "@alorel/eslint-config-base@npm:1.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40alorel%2Feslint-config-base%2F1.0.7%2F521dfd1abcf5a86ee762e31f311191d74c30ef0919825b339563cc3ba633563e"
   peerDependencies:
     eslint: ">=7.9.0"
-  checksum: 2/ceeb787732190a6bf6a57b4537d83836727cd2f750f1537e82dd478adce9478f628855a754977a73e1baa59f84fd71dad3bdfa00e84696949b579c9859a55610
+  checksum: 2/75e7e3878dcc50894be0c5e52c0e8c8be68b9ebdc6ad1d64cfd45a0dcc5018257124232b512a0c932116dfe73e9188d7ea5b7e52c87fe472ff196328fb7b652f
   languageName: node
   linkType: hard
 
@@ -51,7 +51,7 @@ __metadata:
   resolution: "@alorel/preact-shadow-root@workspace:."
   dependencies:
     "@alorel-personal/conventional-changelog-alorel": ^2.1.3
-    "@alorel/eslint-config-base": ^1.0.6
+    "@alorel/eslint-config-base": ^1.0.7
     "@alorel/eslint-config-preact": ^1.0.2
     "@alorel/eslint-config-typescript": ^1.0.7
     "@alorel/rollup-plugin-clean": ^1.0.0
@@ -59,6 +59,8 @@ __metadata:
     "@alorel/rollup-plugin-copy-pkg-json": ^1.0.3
     "@alorel/rollup-plugin-dts": ^2.0.1
     "@alorel/rollup-plugin-threaded-terser": ^1.1.0
+    "@rollup/plugin-alias": ^3.1.1
+    "@rollup/plugin-commonjs": ^15.1.0
     "@rollup/plugin-node-resolve": ^9.0.0
     "@semantic-release/changelog": ^5.0.1
     "@semantic-release/exec": ^5.0.0
@@ -71,7 +73,9 @@ __metadata:
     eslint: ^7.9.0
     eslint-plugin-react: ^7.20.6
     eslint-plugin-react-hooks: ^4.1.2
+    lodash: ^4.17.20
     preact: ^10.4.8
+    prop-types: ^15.7.2
     rollup: ^2.27.1
     rollup-plugin-typescript2: ^0.27.2
     semantic-release: ^17.1.2
@@ -357,6 +361,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/plugin-alias@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "@rollup/plugin-alias@npm:3.1.1"
+  dependencies:
+    slash: ^3.0.0
+  peerDependencies:
+    rollup: ^1.20.0||^2.0.0
+  checksum: 2/785d8a4283e59bbd76447e2ea5128e34c9ebf59b626841a82d5c8366687439c2fe7d0690be04e73e51ada5264d1efdfd4de8ec2528f4f9428f9541040311262c
+  languageName: node
+  linkType: hard
+
+"@rollup/plugin-commonjs@npm:^15.1.0":
+  version: 15.1.0
+  resolution: "@rollup/plugin-commonjs@npm:15.1.0"
+  dependencies:
+    "@rollup/pluginutils": ^3.1.0
+    commondir: ^1.0.1
+    estree-walker: ^2.0.1
+    glob: ^7.1.6
+    is-reference: ^1.2.1
+    magic-string: ^0.25.7
+    resolve: ^1.17.0
+  peerDependencies:
+    rollup: ^2.22.0
+  checksum: 2/307bdc17f35807559ca5796137a1a620b6c9311a6f62166d38ce78f793cd10883843c4c13b7c39f547cefcc0d06e442fc8c746e003077b96df76ec0e6b1eaa4f
+  languageName: node
+  linkType: hard
+
 "@rollup/plugin-node-resolve@npm:^9.0.0":
   version: 9.0.0
   resolution: "@rollup/plugin-node-resolve@npm:9.0.0"
@@ -538,6 +570,13 @@ __metadata:
   version: 1.1.1
   resolution: "@types/color-name@npm:1.1.1"
   checksum: 2/8311db94a9c4ecd247763b81e783ee49d87678b4ce6a7ee502e2bd5cea242b7357804a04855db009f713174bc654cc0c01c7303d40d757e5d710f5ac0368500f
+  languageName: node
+  linkType: hard
+
+"@types/estree@npm:*":
+  version: 0.0.45
+  resolution: "@types/estree@npm:0.0.45"
+  checksum: 2/9d339cbcf29a96a32e9d40efc21009c2342e93c4f653294dd1ef081ae474bca9e54707e5d4a1cff90b9e3566e8bdd71ac31e0c3d24bc2ff1d3d5aa75058b3937
   languageName: node
   linkType: hard
 
@@ -2345,6 +2384,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"estree-walker@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "estree-walker@npm:2.0.1"
+  checksum: 2/51ae3892e256162f942b6cc433f9fe313c30ffc71c9b07099168383fe211ef001a50f1df543ea8ed0753eb768079e0c1a0712540b228bbe3b544260fd113017d
+  languageName: node
+  linkType: hard
+
 "esutils@npm:^2.0.2":
   version: 2.0.3
   resolution: "esutils@npm:2.0.3"
@@ -3453,6 +3499,15 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"is-reference@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "is-reference@npm:1.2.1"
+  dependencies:
+    "@types/estree": "*"
+  checksum: 2/9daa3d7c4dc159e326be68c025a43bf714b36a6d065c2cc6907f7c44d010867dd10ec7f74bff37cb5d2000ac8b03c94cde3d69c85dc9a56a887ce576200ad01f
+  languageName: node
+  linkType: hard
+
 "is-regex@npm:^1.1.0, is-regex@npm:^1.1.1":
   version: 1.1.1
   resolution: "is-regex@npm:1.1.1"
@@ -4119,7 +4174,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.4":
+"lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.4":
   version: 4.17.20
   resolution: "lodash@npm:4.17.20"
   checksum: 2/c62101d2500c383b5f174a7e9e6fe8098149ddd6e9ccfa85f36d4789446195f5c4afd3cfba433026bcaf3da271256566b04a2bf2618e5a39f6e67f8c12030cb6
@@ -4176,6 +4231,15 @@ fsevents@~2.1.2:
   version: 2.4.1
   resolution: "macos-release@npm:2.4.1"
   checksum: 2/0d15f4b163831e3178f3b1eb602938e38690b26caef7b275ae54e2e705d168eb2309d3d4dbc8c08ff03ecb0a04ca2fb3e66cc8b0c42182adc9f90a19b8005e6f
+  languageName: node
+  linkType: hard
+
+"magic-string@npm:^0.25.7":
+  version: 0.25.7
+  resolution: "magic-string@npm:0.25.7"
+  dependencies:
+    sourcemap-codec: ^1.4.4
+  checksum: 2/4b70c13eb21c6f1c54bf7fb029748dc44d6bfcd3c59e5deeda060eecc38df6144b91d10fb7a3cf6156fadab1a68f83d69a189df20ca5f6bd088bf0196ea8f039
   languageName: node
   linkType: hard
 
@@ -6325,6 +6389,13 @@ fsevents@~2.1.2:
   version: 0.6.1
   resolution: "source-map@npm:0.6.1"
   checksum: 2/8647829a0611724114022be455ca1c8a2c8ae61df81c5b3667d9b398207226a1e21174fb7bbf0b4dbeb27ac358222afb5a14f1c74a62a62b8883b012e5eb1270
+  languageName: node
+  linkType: hard
+
+"sourcemap-codec@npm:^1.4.4":
+  version: 1.4.8
+  resolution: "sourcemap-codec@npm:1.4.8"
+  checksum: 2/4d56d1232a45af813606d1755f11e7ae6b3542c615a7e3f904382f0134a9412ba8d090e83749254d78449eafdfcc62d5158b8f35e6241480b51b74b5c46b99f9
   languageName: node
   linkType: hard
 
