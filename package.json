@@ -22,7 +22,7 @@
     "typecheck:watch": "yarn run typecheck --watch"
   },
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^1.9.0 || ^2.0.0"
   },
   "peerDependencies": {
     "preact": "^10.0.0"

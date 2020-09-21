@@ -1,5 +1,6 @@
 import {ComponentChildren, h, VNode} from 'preact';
 import {useLayoutEffect, useRef} from 'preact/hooks';
+import {SUPPORTS_CONSTRUCTABLE_STYLESHEETS} from './adopted/support';
 
 /** @internal */
 interface Props {
@@ -7,17 +8,30 @@ interface Props {
 
   mode: ShadowRootMode;
 
+  sheets?: CSSStyleSheet[];
+
   setShadowRoot(root: ShadowRoot): void;
 
   slots?(): ComponentChildren;
 }
 
 /** @internal */
-export function CreateShadowHost({delegatesFocus, mode, slots, setShadowRoot}: Props): VNode {
+function CreateShadowHost({delegatesFocus, mode, slots, setShadowRoot, sheets}: Props): VNode {
   const ref = useRef<HTMLDivElement>();
+
   useLayoutEffect(() => {
-    setShadowRoot(ref.current!.parentElement!.attachShadow({delegatesFocus, mode}));
+    const root = ref.current!.parentElement!.attachShadow({delegatesFocus, mode});
+    if (SUPPORTS_CONSTRUCTABLE_STYLESHEETS && sheets) {
+      root.adoptedStyleSheets = sheets;
+    }
+
+    setShadowRoot(root);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <div ref={ref} style={'display:none!important'}>{slots && slots()}</div>;
 }
+
+CreateShadowHost.displayName = 'CreateShadowHost';
+
+/** @internal */
+export {CreateShadowHost};

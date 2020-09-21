@@ -1,16 +1,23 @@
-import {ComponentChildren, h, JSX, VNode} from 'preact';
+import {ComponentChildren, Fragment, h, VNode} from 'preact';
 import {useState} from 'preact/hooks';
+import {SUPPORTS_CONSTRUCTABLE_STYLESHEETS} from './adopted/support';
+import {AdoptedStylesheetsCtx} from './AdoptedStylesheetsCtx';
 import {CreateShadowHost} from './CreateShadowHost';
-import {RenderShadowHost} from './RenderShadowHost';
+import {MaintainAdoptedStylesheets} from './MaintainAdoptedStylesheets';
+import {RenderShadowHost, RenderShadowHostProps} from './RenderShadowHost';
 
 /** {@link ShadowHost} properties */
-interface Props<E extends keyof HTMLElementTagNameMap = 'div'>
-  extends JSX.HTMLAttributes<HTMLElementTagNameMap[E]> {
+interface Props {
+
+  adoptedStyleSheets?: CSSStyleSheet[];
 
   /** Shadow root content */
   children: ComponentChildren;
 
-  /** @see {@link ShadowRootInit#delegatesFocus} */
+  /**
+   * @see {@link ShadowRootInit#delegatesFocus}
+   * @default false
+   */
   delegatesFocus?: boolean;
 
   /**
@@ -24,27 +31,47 @@ interface Props<E extends keyof HTMLElementTagNameMap = 'div'>
 }
 
 /** Create an element with a shadow root */
-function ShadowHost<E extends keyof HTMLElementTagNameMap = 'div'>(props: Props<E>): VNode<any> {
-  const {
-    children,
-    delegatesFocus,
-    mode,
-    slots
-  } = props;
-
+function ShadowHost({adoptedStyleSheets, children, delegatesFocus, mode, slots}: Props): VNode<any> {
   // A placeholder element will be displayed before a shadow root is created
   const [shadowRoot, setShadowRoot] = useState<ShadowRoot>(null as any);
 
+  if (!shadowRoot) {
+    return <CreateShadowHost
+      mode={mode!}
+      delegatesFocus={delegatesFocus}
+      sheets={adoptedStyleSheets}
+      setShadowRoot={setShadowRoot}
+      slots={slots}/>;
+  }
+
+  const props: RenderShadowHostProps = {contents: children, root: shadowRoot, slots};
+
+  if (!adoptedStyleSheets) {
+    return <RenderShadowHost {...props}/>;
+  }
+
+  if (SUPPORTS_CONSTRUCTABLE_STYLESHEETS) {
+    return (
+      <Fragment>
+        <MaintainAdoptedStylesheets root={shadowRoot} sheets={adoptedStyleSheets}/>
+        <RenderShadowHost {...props}/>
+      </Fragment>
+    );
+  }
+
   return (
-    shadowRoot ?
-      <RenderShadowHost contents={children} root={shadowRoot} slots={slots}/> :
-      <CreateShadowHost mode={mode!} delegatesFocus={delegatesFocus} setShadowRoot={setShadowRoot} slots={slots}/>
+    <AdoptedStylesheetsCtx.Provider value={adoptedStyleSheets}>
+      <RenderShadowHost {...props}/>
+    </AdoptedStylesheetsCtx.Provider>
   );
 }
 
+ShadowHost.displayName = 'ShadowHost';
+
 ShadowHost.defaultProps = {
+  delegatesFocus: false,
   mode: 'open'
-} as Required<Pick<Props, 'mode'>>;
+} as Partial<Props>;
 
 export {ShadowHost, Props as ShadowHostProps};
 

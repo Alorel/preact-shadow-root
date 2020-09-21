@@ -20,8 +20,10 @@ function RenderShadowHost({contents, root, slots}: Props): VNode {
   );
 }
 
+RenderShadowHost.displayName = 'RenderShadowHost';
+
 /** @internal */
 const memoed = memo(RenderShadowHost);
 
 /** @internal */
-export {memoed as RenderShadowHost};
+export {memoed as RenderShadowHost, Props as RenderShadowHostProps};
