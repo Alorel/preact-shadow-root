@@ -182,7 +182,10 @@ When they aren't, `<AdoptedStylesheets/>` will render them as regular styles:
 
 ![Result](https://user-images.githubusercontent.com/4998038/93816202-20bb8e80-fc4f-11ea-999f-5ea576ab6a7c.png)
 
-Note that adopted stylesheets are applied *after* all the `<style>` attributes - position `<AdoptedStylesheets/>` accordingly. 
+Notes:
+
+- Adopted stylesheets are applied *after* all the `<style>` attributes - position `<AdoptedStylesheets/>` accordingly
+- Maintain the same reference to the stylesheets array unless a sheet gets added/removed, otherwise they'll keep getting reapplied
 
 # Build flavours
 
