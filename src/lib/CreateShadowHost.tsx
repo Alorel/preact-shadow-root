@@ -1,6 +1,6 @@
+import {SUPPORTS_CONSTRUCTABLE_STYLESHEETS} from '@alorel/commons-constructable-css';
 import {ComponentChildren, h, VNode} from 'preact';
 import {useLayoutEffect, useRef} from 'preact/hooks';
-import {SUPPORTS_CONSTRUCTABLE_STYLESHEETS} from './adopted/support';
 
 /** @internal */
 interface Props {
