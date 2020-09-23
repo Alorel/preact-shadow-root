@@ -38,7 +38,7 @@ function mkNodeResolve() {
 const baseInput = join(srcDir, 'index.ts');
 
 const baseSettings = {
-  external: external.concat('tslib'),
+  external: external.concat('tslib', '@alorel/commons-constructable-css'),
   input: join(srcDir, 'index.ts'),
   preserveModules: false,
   watch: {

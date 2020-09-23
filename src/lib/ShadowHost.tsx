@@ -1,6 +1,6 @@
+import {SUPPORTS_CONSTRUCTABLE_STYLESHEETS} from '@alorel/commons-constructable-css';
 import {ComponentChildren, Fragment, h, VNode} from 'preact';
 import {useState} from 'preact/hooks';
-import {SUPPORTS_CONSTRUCTABLE_STYLESHEETS} from './adopted/support';
 import {AdoptedStylesheetsCtx} from './AdoptedStylesheetsCtx';
 import {CreateShadowHost} from './CreateShadowHost';
 import {MaintainAdoptedStylesheets} from './MaintainAdoptedStylesheets';
