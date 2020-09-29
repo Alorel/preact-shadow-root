@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/Alorel/preact-shadow-root/compare/1.0.1...1.0.2) (2020-09-29)
+
+
+### Bug Fixes
+
+* **main:** Internal sheetToString function no longer exported ([07f3d43](https://github.com/Alorel/preact-shadow-root/commit/07f3d43b504282af16fbdf6194396e7d8a15bd8e))
+
 ## [1.0.1](https://github.com/Alorel/preact-shadow-root/compare/1.0.0...1.0.1) (2020-09-23)
 
 
