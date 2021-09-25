@@ -62,6 +62,9 @@ interface Props {
    */
   delegatesFocus?: boolean;
 
+  /** Attach the shadow root to this host element instead of creating one */
+  host?: Element;
+
   /**
    * Shadow root mode. Changes to this property are ignored.
    * @default open

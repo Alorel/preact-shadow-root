@@ -20,6 +20,9 @@ interface Props {
    */
   delegatesFocus?: boolean;
 
+  /** Attach the shadow root to this host element instead of creating one */
+  host?: Element;
+
   /**
    * Shadow root mode. Changes to this property are ignored.
    * @default open
@@ -31,13 +34,14 @@ interface Props {
 }
 
 /** Create an element with a shadow root */
-function ShadowHost({adoptedStyleSheets, children, delegatesFocus, mode, slots}: Props): VNode<any> {
+function ShadowHost({adoptedStyleSheets, children, delegatesFocus, host, mode, slots}: Props): VNode<any> {
   // A placeholder element will be displayed before a shadow root is created
   const [shadowRoot, setShadowRoot] = useState<ShadowRoot>(null as any);
 
   if (!shadowRoot) {
     return <CreateShadowHost
       mode={mode!}
+      host={host}
       delegatesFocus={delegatesFocus}
       sheets={adoptedStyleSheets}
       setShadowRoot={setShadowRoot}
