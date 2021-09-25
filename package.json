@@ -1,6 +1,6 @@
 {
   "name": "@alorel/preact-shadow-root",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Renders components in a v1 ShadowRoot",
   "main": "index.js",
   "esm5": "index.esm5.js",

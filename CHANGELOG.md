@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Alorel/preact-shadow-root/compare/1.0.2...1.1.0) (2021-09-25)
+
+
+### Features
+
+* Accept host parameter ([56d7b43](https://github.com/Alorel/preact-shadow-root/commit/56d7b436c5e3f35083f02babdffc9baf6107b4ab))
+
 ## [1.0.2](https://github.com/Alorel/preact-shadow-root/compare/1.0.1...1.0.2) (2020-09-29)
 
 
