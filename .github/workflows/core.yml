@@ -7,20 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 1
-      - name: Cache yarn
-        uses: actions/cache@v1
-        with:
-          key: v1-ubuntu-latest-14.x-${{ github.ref }}-yarn
-          path: .yarn/cache
-          restore-keys: |
-            v1-ubuntu-latest-14.x-refs/heads/master-yarn
       - name: Set up node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          cache: yarn
+          node-version: 18
           registry-url: https://npm.pkg.github.com/alorel
       - name: Set up yarn
         run: npm install -g yarn@^2.0.0-rc.27
