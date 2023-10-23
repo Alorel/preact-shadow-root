@@ -18,7 +18,7 @@ jobs:
           restore-keys: |
             v1-ubuntu-latest-14.x-refs/heads/master-yarn
       - name: Set up node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 14.x
           registry-url: https://npm.pkg.github.com/alorel
